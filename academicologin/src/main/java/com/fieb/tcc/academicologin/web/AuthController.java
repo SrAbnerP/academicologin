@@ -4,8 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fieb.tcc.academicologin.model.User;
 import com.fieb.tcc.academicologin.service.UserService;
 import com.fieb.tcc.academicologin.web.dto.UserDto;
 
@@ -18,7 +22,7 @@ public class AuthController {
 	public AuthController(UserService userService) {
 		this.userService = userService;
 	}
-	
+
 	@ModelAttribute("user")
 	public UserDto userDto() {
 		return new UserDto();
@@ -31,9 +35,26 @@ public class AuthController {
 
 	@PostMapping("/registration")
 	public String registerUserAccount(@ModelAttribute("user") UserDto userDto) {
-				
+
 		userService.save(userDto);
 
 		return "redirect:/registration?sucess";
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/registration/ajax/getEmail/{campo}/{valor}")
+	public String getSearchResultViaAjaxRegister(@PathVariable("campo") String campo,
+			@PathVariable("valor") String valor) {
+
+		String msg = "";
+
+		UserDto userDto = new UserDto();
+		userDto.setEmail(valor);
+		User user = userService.findByEmail(userDto);
+
+		if (user != null) {
+			msg = "Email já existe, escolha um email válido!";
+		}
+		return null;
 	}
 }
