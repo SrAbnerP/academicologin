@@ -55,6 +55,6 @@ public class AuthController {
 		if (user != null) {
 			msg = "Email já existe, escolha um email válido!";
 		}
-		return null;
+		return msg;
 	}
 }
