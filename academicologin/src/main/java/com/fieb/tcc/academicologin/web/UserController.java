@@ -26,7 +26,7 @@ public class UserController {
 	@GetMapping("/users/home")
 	public String home(Model model) {
 
-		String username = userService.getAuthenticatdUser().getEmail();
+		String username = userService.getAuthenticatedUser().getEmail();
 		model.addAttribute("username", username);
 
 		return "index";
