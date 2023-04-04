@@ -61,7 +61,8 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User update(UserDto userDto) {
 
-		User user = new User();
+		User user = userRepository.findByEmail(userDto.getEmail());
+
 		user.setFirstName(userDto.getFirstName());
 		user.setLastName(userDto.getLastName());
 		user.setEmail(userDto.getEmail());
