@@ -11,7 +11,7 @@ public interface UserService extends UserDetailsService {
 
 	User findByEmail(UserDto UserDto);
 
-	User update(User user);
+	User update(UserDto userDto);
 
 	User getAuthenticatedUser();
 }
