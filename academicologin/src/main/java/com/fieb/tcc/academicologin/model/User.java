@@ -16,6 +16,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 public class User {
@@ -45,6 +47,7 @@ public class User {
 
 	@OneToMany
 	@JoinColumn(name = "user_id")
+	@JsonIgnore
 	private Collection<Curso> cursos;
 
 	public User() {
