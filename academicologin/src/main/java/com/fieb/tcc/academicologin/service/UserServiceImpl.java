@@ -113,4 +113,14 @@ public class UserServiceImpl implements UserService {
 
 	}
 
+	@Override
+	public User getUserByUsername(String username) {
+		return userRepository.findByEmail(username);
+	}
+
+	@Override
+	public User findUserById(Long id) {
+		return userRepository.findById(id).get();
+	}
+
 }
